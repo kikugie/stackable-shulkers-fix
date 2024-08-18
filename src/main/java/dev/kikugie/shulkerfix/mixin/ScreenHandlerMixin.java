@@ -11,8 +11,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ScreenHandler.class)
 public class ScreenHandlerMixin {
-    @WrapOperation(method = "calculateComparatorOutput(Lnet/minecraft/inventory/Inventory;)I", at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;getMaxCount(Lnet/minecraft/item/ItemStack;)I"))
-    private static int get1(Inventory instance, ItemStack stack, Operation<Integer> original) {
-        return Util.isShulkerBox(stack) ? 1 : original.call(instance, stack);
-    }
+	@WrapOperation(
+		method = "calculateComparatorOutput(Lnet/minecraft/inventory/Inventory;)I",
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;getMaxCount(Lnet/minecraft/item/ItemStack;)I")
+	)
+	private static int get1(Inventory instance, ItemStack stack, Operation<Integer> original) {
+		return Util.isShulkerBox(stack) ? 1 : original.call(instance, stack);
+	}
 }

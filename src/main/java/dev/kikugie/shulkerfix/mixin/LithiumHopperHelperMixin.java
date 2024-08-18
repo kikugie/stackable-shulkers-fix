@@ -12,8 +12,17 @@ import org.spongepowered.asm.mixin.injection.At;
 @Pseudo
 @Mixin(value = HopperHelper.class)
 public class LithiumHopperHelperMixin {
-    @WrapOperation(method = {"tryMoveSingleItem(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/SidedInventory;Lnet/minecraft/item/ItemStack;ILnet/minecraft/util/math/Direction;)Z", "determineComparatorUpdatePattern"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxCount()I"))
-    private static int modifyShulkerMaxCount(ItemStack instance, Operation<Integer> original) {
-        return Util.isShulkerBox(instance) ? 1 : original.call(instance);
-    }
+	@SuppressWarnings("UnresolvedMixinReference")
+	@WrapOperation(
+		method = {
+			"determineComparatorUpdatePattern",
+			// Lithium <0.13 compat
+			"tryMoveSingleItem(Lnet/minecraft/inventoryay/Inventory;Lnet/minecraft/inventory/SidedInventory;Lnet/minecraft/item/ItemStack;ILnet/minecraft/util/math/Direction;)Z",
+			"tryMoveSingleItem(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/SidedInventory;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;ILnet/minecraft/util/math/Direction;)Z"
+		},
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxCount()I")
+	)
+	private static int modifyShulkerMaxCount(ItemStack instance, Operation<Integer> original) {
+		return Util.isShulkerBox(instance) ? 1 : original.call(instance);
+	}
 }

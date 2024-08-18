@@ -5,6 +5,7 @@
   "mixins": [
     "HopperBlockEntityMixin",
     "LithiumHopperHelperMixin",
+    "LithiumStackListMixin",
     "ScreenHandlerMixin"
   ],
   "injectors": {
