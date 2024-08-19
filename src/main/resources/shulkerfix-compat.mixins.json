@@ -3,10 +3,8 @@
   "package": "dev.kikugie.shulkerfix.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "HopperBlockEntityMixin",
-    "ScreenHandlerMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+    "ItemStackCodecMixin",
+    "LithiumHopperHelperMixin",
+    "LithiumStackListMixin"
+  ]
 }

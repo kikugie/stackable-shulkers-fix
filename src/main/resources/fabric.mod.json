@@ -1,24 +1,30 @@
 {
-	"schemaVersion": 1,
-	"id": "shulkerfix",
-	"version": "${version}",
-	"name": "Stackable Shulker Fix",
-	"description": "Makes stackable shulker boxes unstackable by hoppers",
-	"authors": [
-		"KikuGIe"
-	],
-	"license": "MIT",
-	"environment": "*",
-	"mixins": [
-		"shulkerfix.mixins.json"
-	],
-	"depends": {
-		"fabricloader": ">=0.15",
-		"minecraft": ">=1.20.5",
-		"carpet": ">=1.4.140",
-		"java": ">=21"
-	},
-	"recommends": {
-		"lithium": ">=0.12"
-	}
+  "schemaVersion": 1,
+  "id": "shulkerfix",
+  "version": "${version}",
+  "name": "Stackable Shulker Fix",
+  "description": "Makes stackable shulker boxes unstackable by hoppers",
+  "authors": [
+    "KikuGIe"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "mixins": [
+    "shulkerfix.mixins.json",
+    "shulkerfix-compat.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "dev.kikugie.shulkerfix.ShulkerFixMod"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15",
+    "minecraft": ">=1.20.5",
+    "carpet": ">=1.4.140",
+    "java": ">=21"
+  },
+  "recommends": {
+    "lithium": ">=0.12"
+  }
 }

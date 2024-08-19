@@ -1,0 +1,5 @@
+{
+  "carpet.category.shulkerfix": "ShulkerFix",
+  "carpet.rule.clientShulkerSync.name": "Sync Stacked Shulker Count",
+  "carpet.rule.clientShulkerSync.desc": "Fixes displayed shulker amount on vanilla clients. See issue #1899 in Carpet's repo."
+}
