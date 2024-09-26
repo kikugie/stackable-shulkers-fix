@@ -8,4 +8,7 @@ public class ShulkerFixSettings {
 
 	@Rule(categories = {SHULKERFIX, RuleCategory.BUGFIX, RuleCategory.EXPERIMENTAL})
 	public static boolean clientShulkerSync = false;
+
+	@Rule(categories = {SHULKERFIX, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL})
+	public static boolean minecartOnlyTransferOneShulker = false;
 }
