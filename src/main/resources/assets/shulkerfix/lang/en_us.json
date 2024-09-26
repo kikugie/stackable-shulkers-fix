@@ -2,6 +2,6 @@
   "carpet.category.shulkerfix": "ShulkerFix",
   "carpet.rule.clientShulkerSync.name": "Sync Stacked Shulker Count",
   "carpet.rule.clientShulkerSync.desc": "Fixes displayed shulker amount on vanilla clients. See issue #1899 in Carpet's repo.",
-  "carpet.rule.minecartOnlyTransferOneShulker.name": "Hopper Minecart Only Transfer One Shulker Box",
-  "carpet.rule.minecartOnlyTransferOneShulker.desc": "Hopper minecart will only transfer one shulker box."
+  "carpet.rule.hopperOnlyTransferOneShulker.name": "Hopper Minecart Only Transfer One Shulker Box",
+  "carpet.rule.hopperOnlyTransferOneShulker.desc": "Hopper minecart will only transfer one shulker box."
 }

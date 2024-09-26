@@ -2,9 +2,11 @@ package dev.kikugie.shulkerfix.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import dev.kikugie.shulkerfix.Util;
 import dev.kikugie.shulkerfix.carpet.ShulkerFixSettings;
 import net.minecraft.block.entity.HopperBlockEntity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Direction;
@@ -38,12 +40,25 @@ public class HopperBlockEntityMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;transfer(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/Inventory;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/Direction;)Lnet/minecraft/item/ItemStack;")
 	)
 	private static ItemStack modifyShulkerCount(Inventory from, Inventory to, ItemStack stack, Direction side, Operation<ItemStack> original) {
-		if (ShulkerFixSettings.minecartOnlyTransferOneShulker && Util.isShulkerBox(stack) && stack.getCount() > 1) {
+		if (ShulkerFixSettings.hopperOnlyTransferOneShulker && Util.isShulkerBox(stack) && stack.getCount() > 1) {
 			if (original.call(from, to, stack.copyWithCount(1), side).isEmpty())
 				stack.decrement(1);
 			return stack;
 		} else return original.call(from, to, stack, side);
     }
+
+	@Inject(
+		method = "extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z",
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z"),
+		cancellable = true
+	)
+	private static void checkIsShulker(Inventory inventory, ItemEntity itemEntity, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 1) ItemStack transferredStack) {
+		ItemStack stack = itemEntity.getStack();
+		if (ShulkerFixSettings.hopperOnlyTransferOneShulker && Util.isShulkerBox(stack) && stack.getCount() > 1) {
+			itemEntity.setStack(transferredStack);
+			cir.setReturnValue(true);
+		}
+	}
 
 	@Inject(
 		method = "canMergeItems",
