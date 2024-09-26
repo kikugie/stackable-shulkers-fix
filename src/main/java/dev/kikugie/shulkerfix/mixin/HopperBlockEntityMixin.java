@@ -33,18 +33,17 @@ public class HopperBlockEntityMixin {
 		return Util.isShulkerBox(instance) ? 1 : original.call(instance);
 	}
 
-	@Inject(
-		method = "transfer(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/Inventory;Lnet/minecraft/item/ItemStack;ILnet/minecraft/util/math/Direction;)Lnet/minecraft/item/ItemStack;",
-		at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;setStack(ILnet/minecraft/item/ItemStack;)V"),
-		cancellable = true
+	@WrapOperation(
+		method = "extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z",
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;transfer(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/Inventory;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/Direction;)Lnet/minecraft/item/ItemStack;")
 	)
-	private static void checkIsShulker(Inventory from, Inventory to, ItemStack stack, int slot, Direction side, CallbackInfoReturnable<ItemStack> cir) {
-		if (Util.isShulkerBox(stack) && ShulkerFixSettings.minecartOnlyTransferOneShulker) {
-			to.setStack(slot, stack.copyWithCount(1));
-			stack.decrement(1);
-			cir.setReturnValue(stack);
-		}
-	}
+	private static ItemStack modifyShulkerCount(Inventory from, Inventory to, ItemStack stack, Direction side, Operation<ItemStack> original) {
+		if (ShulkerFixSettings.minecartOnlyTransferOneShulker && Util.isShulkerBox(stack) && stack.getCount() > 1) {
+			if (original.call(from, to, stack.copyWithCount(1), side).isEmpty())
+				stack.decrement(1);
+			return stack;
+		} else return original.call(from, to, stack, side);
+    }
 
 	@Inject(
 		method = "canMergeItems",
