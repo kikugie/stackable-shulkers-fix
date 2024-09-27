@@ -40,12 +40,12 @@ public class HopperBlockEntityMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;transfer(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/Inventory;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/math/Direction;)Lnet/minecraft/item/ItemStack;")
 	)
 	private static ItemStack modifyShulkerCount(Inventory from, Inventory to, ItemStack stack, Direction side, Operation<ItemStack> original) {
-		if (ShulkerFixSettings.hopperOnlyTransferOneShulker && Util.isShulkerBox(stack) && stack.getCount() > 1) {
-			if (original.call(from, to, stack.copyWithCount(1), side).isEmpty())
-				stack.decrement(1);
-			return stack;
-		} else return original.call(from, to, stack, side);
-    }
+		if (!ShulkerFixSettings.hopperCollectSingleShulkers || !Util.isShulkerBox(stack) || stack.getCount() <= 1)
+			return original.call(from, to, stack, side);
+		if (original.call(from, to, stack.copyWithCount(1), side).isEmpty())
+			stack.decrement(1);
+		return stack;
+	}
 
 	@Inject(
 		method = "extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z",
@@ -54,7 +54,7 @@ public class HopperBlockEntityMixin {
 	)
 	private static void checkIsShulker(Inventory inventory, ItemEntity itemEntity, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 1) ItemStack transferredStack) {
 		ItemStack stack = itemEntity.getStack();
-		if (ShulkerFixSettings.hopperOnlyTransferOneShulker && Util.isShulkerBox(stack) && stack.getCount() > 1) {
+		if (ShulkerFixSettings.hopperCollectSingleShulkers && Util.isShulkerBox(stack) && stack.getCount() > 1) {
 			itemEntity.setStack(transferredStack);
 			cir.setReturnValue(true);
 		}

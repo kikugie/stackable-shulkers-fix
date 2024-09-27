@@ -10,5 +10,5 @@ public class ShulkerFixSettings {
 	public static boolean clientShulkerSync = false;
 
 	@Rule(categories = {SHULKERFIX, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL})
-	public static boolean hopperOnlyTransferOneShulker = false;
+	public static boolean hopperCollectSingleShulkers = false;
 }
