@@ -11,4 +11,7 @@ public class ShulkerFixSettings {
 
 	@Rule(categories = {SHULKERFIX, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL})
 	public static boolean hopperCollectSingleShulkers = false;
+
+	@Rule(categories = {SHULKERFIX, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL})
+	public static boolean overstackedMinecartSlowdown = true;
 }
