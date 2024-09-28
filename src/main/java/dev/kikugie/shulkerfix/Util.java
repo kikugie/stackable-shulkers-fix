@@ -1,7 +1,9 @@
 package dev.kikugie.shulkerfix;
 
 import net.minecraft.block.ShulkerBoxBlock;
+import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.component.DataComponentTypes;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.BlockItem;
@@ -24,6 +26,20 @@ public class Util {
 
 	public static boolean isWrapped(Inventory inventory) {
 		return inventory instanceof WrapperInventory;
+	}
+
+	public static boolean collectOneItem(Inventory inventory, ItemEntity itemEntity) {
+		ItemStack itemStack = itemEntity.getStack().copyWithCount(1);
+		ItemStack itemStack2 = HopperBlockEntity.transfer(null, inventory, itemStack, null);
+		if (itemStack2.isEmpty()) {
+			itemEntity.getStack().decrement(1);
+			if (itemEntity.getStack().isEmpty()) {
+				itemEntity.setStack(ItemStack.EMPTY);
+				itemEntity.discard();
+			}
+			return true;
+		}
+		return false;
 	}
 
 	private record WrapperInventory(Inventory delegate) implements Inventory {
