@@ -38,11 +38,22 @@ public class HopperBlockEntityMixin {
 		method = "extract(Lnet/minecraft/world/World;Lnet/minecraft/block/entity/Hopper;)Z",
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z")
 	)
-	private static boolean limitMinecartCollectItems(Inventory inventory, ItemEntity itemEntity, Operation<Boolean> original) {
+	private static boolean limitCollectCount(Inventory inventory, ItemEntity itemEntity, Operation<Boolean> original) {
 		if (!Util.isShulkerBox(itemEntity.getStack())) return original.call(inventory, itemEntity);
 		if (ShulkerFixSettings.hopperCollectSingleShulkers && inventory instanceof HopperBlockEntity)
 			return Util.collectOneItem(inventory, itemEntity);
 		else if (ShulkerFixSettings.minecartCollectSingleShulkers && inventory instanceof HopperMinecartEntity)
+			return Util.collectOneItem(inventory, itemEntity);
+		else return original.call(inventory, itemEntity);
+	}
+
+	@WrapOperation(
+		method = "method_31693",
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z")
+	)
+	private static boolean limitHopperCollectCount(Inventory inventory, ItemEntity itemEntity, Operation<Boolean> original) {
+		if (!Util.isShulkerBox(itemEntity.getStack())) return original.call(inventory, itemEntity);
+		if (ShulkerFixSettings.hopperCollectSingleShulkers)
 			return Util.collectOneItem(inventory, itemEntity);
 		else return original.call(inventory, itemEntity);
 	}
