@@ -6,8 +6,6 @@ import carpet.api.settings.SettingsManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dev.kikugie.shulkerfix.ShulkerFixMod;
-import dev.kikugie.shulkerfix.ShulkerFixProperties;
-import dev.kikugie.shulkerfix.mixin.compat.CarpetSettingsManagerAccessor;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 
@@ -34,29 +32,6 @@ public class ShulkerFixExtension implements CarpetExtension {
 	@Override
 	public void onGameStarted() {
 		CarpetServer.settingsManager.parseSettingsClass(ShulkerFixSettings.class);
-	}
-
-	@Override
-	public void onServerLoadedWorlds(MinecraftServer server) {
-		ShulkerFixProperties properties = ShulkerFixProperties.load(server);
-		if (!properties.seenRuleNotification) try {
-			ShulkerFixSettings.hopperShulkerStacking = false;
-			ShulkerFixSettings.overstackedShulkerSignalStrength = true;
-
-			SettingsManager manager = CarpetServer.settingsManager;
-			((CarpetSettingsManagerAccessor) manager).invokeSetDefault(
-				server.getCommandSource(),
-				manager.getCarpetRule("hopperShulkerStacking"),
-				"false");
-			((CarpetSettingsManagerAccessor) manager).invokeSetDefault(
-				server.getCommandSource(),
-				manager.getCarpetRule("overstackedShulkerSignalStrength"),
-				"true");
-			properties.seenRuleNotification = true;
-		} catch (Exception e) {
-			ShulkerFixMod.LOGGER.warn("Failed to save rule defaults", e);
-		}
-		properties.save(server);
 	}
 
 	@Override
