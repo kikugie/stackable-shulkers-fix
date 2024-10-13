@@ -1,5 +1,11 @@
 {
   "carpet.category.shulkerfix": "ShulkerFix",
   "carpet.rule.clientShulkerSync.name": "Sync Stacked Shulker Count",
-  "carpet.rule.clientShulkerSync.desc": "Fixes displayed shulker amount on vanilla clients. See issue #1899 in Carpet's repo."
+  "carpet.rule.clientShulkerSync.desc": "Fixes displayed shulker amount on vanilla clients. See issue #1899 in Carpet's repo.",
+  "carpet.rule.hopperCollectSingleShulkers.name": "Hoppers Collect Single Shulkers",
+  "carpet.rule.hopperCollectSingleShulkers.desc": "Makes hoppers pick up single shulkers from a stack entity.",
+  "carpet.rule.minecartCollectSingleShulkers.name": "Hopper Minecarts Collect Single Shulkers",
+  "carpet.rule.minecartCollectSingleShulkers.desc": "Makes hopper minecarts pick up single shulkers from a stack entity.",
+  "carpet.rule.overstackedMinecartSlowdown.name": "Overstacked Minecart Slowdown",
+  "carpet.rule.overstackedMinecartSlowdown.desc": "Disables additional slowdown caused by overstacked shulker boxes when set to false."
 }
