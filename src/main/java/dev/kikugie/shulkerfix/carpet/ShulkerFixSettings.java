@@ -6,6 +6,12 @@ import carpet.api.settings.RuleCategory;
 public class ShulkerFixSettings {
 	public static final String SHULKERFIX = "shulkerfix";
 
+	@Rule(categories = {SHULKERFIX, RuleCategory.BUGFIX})
+	public static boolean hopperShulkerStacking = true;
+
+	@Rule(categories = {SHULKERFIX, RuleCategory.BUGFIX})
+	public static boolean overstackedShulkerSignalStrength = false;
+
 	@Rule(categories = {SHULKERFIX, RuleCategory.BUGFIX, RuleCategory.EXPERIMENTAL})
 	public static boolean clientShulkerSync = false;
 

@@ -1,5 +1,6 @@
 package dev.kikugie.shulkerfix;
 
+import dev.kikugie.shulkerfix.carpet.ShulkerFixSettings;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.component.DataComponentTypes;
@@ -10,6 +11,14 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 
 public class Util {
+	public static boolean isShulkerBoxChecked(ItemStack stack) {
+		return !ShulkerFixSettings.hopperShulkerStacking && isShulkerBox(stack);
+	}
+
+	public static boolean isShulkerBoxLimited(ItemStack stack) {
+		return ShulkerFixSettings.overstackedShulkerSignalStrength && isShulkerBox(stack);
+	}
+
 	public static boolean isShulkerBox(ItemStack stack) {
 		return stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof ShulkerBoxBlock;
 	}

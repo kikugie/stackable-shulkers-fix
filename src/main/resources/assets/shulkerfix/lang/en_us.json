@@ -1,5 +1,9 @@
 {
   "carpet.category.shulkerfix": "ShulkerFix",
+  "carpet.rule.hopperShulkerStacking.name": "Hopper Shulker Box Stacking",
+  "carpet.rule.hopperShulkerStacking.desc": "Controls whenever hopper transfers should stack shulkers in containers.",
+  "carpet.rule.overstackedShulkerSignalStrength.name": "Overstacked Shulker Signal Strength",
+  "carpet.rule.overstackedShulkerSignalStrength.desc": "Makes stacked shulkers create stronger comparator output, also known as OSS/HSS.",
   "carpet.rule.clientShulkerSync.name": "Sync Stacked Shulker Count",
   "carpet.rule.clientShulkerSync.desc": "Fixes displayed shulker amount on vanilla clients. See issue #1899 in Carpet's repo.",
   "carpet.rule.hopperCollectSingleShulkers.name": "Hoppers Collect Single Shulkers",
@@ -7,5 +11,7 @@
   "carpet.rule.minecartCollectSingleShulkers.name": "Hopper Minecarts Collect Single Shulkers",
   "carpet.rule.minecartCollectSingleShulkers.desc": "Makes hopper minecarts pick up single shulkers from a stack entity.",
   "carpet.rule.overstackedMinecartSlowdown.name": "Overstacked Minecart Slowdown",
-  "carpet.rule.overstackedMinecartSlowdown.desc": "Disables additional slowdown caused by overstacked shulker boxes when set to false."
+  "carpet.rule.overstackedMinecartSlowdown.desc": "Disables additional slowdown caused by overstacked shulker boxes when set to false.",
+
+  "shulkerfix.message.seenRuleNotification": "§a[ShulkerFix]§r The default functionality of this mod has been moved to §bhopperShulkerStacking§b and §boverstackedShulkerSignalStrength§r Carpet rules. For compatibility reasons the functionality has been enabled for this world. This only happens for the first time a world is loaded and you can disable the rules if you want."
 }

@@ -3,6 +3,7 @@
   "package": "dev.kikugie.shulkerfix.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "HopperMinecartEntityMixin",
     "HopperBlockEntityMixin",
     "ScreenHandlerMixin",
     "StorageMinecartEntityMixin"

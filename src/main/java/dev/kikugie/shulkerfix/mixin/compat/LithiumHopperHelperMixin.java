@@ -1,4 +1,4 @@
-package dev.kikugie.shulkerfix.mixin;
+package dev.kikugie.shulkerfix.mixin.compat;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -23,6 +23,6 @@ public class LithiumHopperHelperMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxCount()I")
 	)
 	private static int modifyShulkerMaxCount(ItemStack instance, Operation<Integer> original) {
-		return Util.isShulkerBox(instance) ? 1 : original.call(instance);
+		return Util.isShulkerBoxChecked(instance) ? 1 : original.call(instance);
 	}
 }

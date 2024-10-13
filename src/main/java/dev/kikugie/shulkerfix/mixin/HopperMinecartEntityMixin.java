@@ -12,11 +12,14 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(HopperMinecartEntity.class)
 public class HopperMinecartEntityMixin {
-    @WrapOperation(
-        method = "canOperate",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z")
-    )
-    private boolean limitCollectItems(Inventory inventory, ItemEntity itemEntity, Operation<Boolean> original) {
-        return Util.isShulkerBox(itemEntity.getStack()) && ShulkerFixSettings.minecartCollectSingleShulkers ? Util.collectOneItem(inventory, itemEntity) : original.call(inventory, itemEntity);
-    }
+	@WrapOperation(
+		method = "canOperate",
+		at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z")
+	)
+	private boolean limitCollectItems(Inventory inventory, ItemEntity itemEntity, Operation<Boolean> original) {
+		return Util.isShulkerBoxChecked(itemEntity.getStack())
+			&& ShulkerFixSettings.minecartCollectSingleShulkers
+			? Util.collectOneItem(inventory, itemEntity)
+			: original.call(inventory, itemEntity);
+	}
 }
