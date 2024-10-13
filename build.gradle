@@ -31,7 +31,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modCompileOnly ("maven.modrinth:lithium:${project.lithium}")
+	modLocalRuntime modCompileOnly("maven.modrinth:lithium:${project.lithium}")
 	modImplementation "curse.maven:carpet-349239:${project.carpet}"
 }
 
