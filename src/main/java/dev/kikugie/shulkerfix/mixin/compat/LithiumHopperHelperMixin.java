@@ -3,7 +3,7 @@ package dev.kikugie.shulkerfix.mixin.compat;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.kikugie.shulkerfix.Util;
-import me.jellysquid.mods.lithium.common.hopper.HopperHelper;
+import net.caffeinemc.mods.lithium.common.hopper.HopperHelper;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
