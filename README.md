@@ -63,3 +63,12 @@ where vanilla clients see stacked shulker boxes as single items inside container
 - Default: `false`
 - Categories: `shulkerfix`, `bugfix`, `experimental`
 - Since: `1.4`
+
+## Known issues/quirks
+
+### Item merging order
+Some shulker box colour sorters may be broken even when using this mod.
+Before 1.20.5 Carpet used custom logic for merging shulker box item entities,
+but now it relies on the vanilla behaviour.  
+There are currently no plans to port the old behaviour, but if you need it,
+submit an issue or a pull request on the GitHub page.
