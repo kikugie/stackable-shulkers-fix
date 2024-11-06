@@ -8,6 +8,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 
+/**
+ * Prevents shulker stacking with Lithium installed.
+ * <br>
+ * <li>{@code me.jellysquid.mods.lithium.common.hopper.HopperHelper} is used for Lithium <0.14 compatibility.</li>
+ */
 @Pseudo
 @Mixin(targets = {"net.caffeinemc.mods.lithium.common.hopper.LithiumStackList", "me.jellysquid.mods.lithium.common.hopper.LithiumStackList"})
 public class LithiumStackListMixin {

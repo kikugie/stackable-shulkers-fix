@@ -8,6 +8,12 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 
+/**
+ * Prevents shulker stacking with Lithium installed.
+ * <br>
+ * <li>{@code me.jellysquid.mods.lithium.common.hopper.HopperHelper} is used for Lithium <0.14 compatibility.</li>
+ * <li>{@code tryMoveSingleItem(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/SidedInventory;Lnet/minecraft/item/ItemStack;ILnet/minecraft/util/math/Direction;)Z} is used for Lithium <0.13 compatibility.</li>
+ */
 @Pseudo
 @Mixin(targets = {"net.caffeinemc.mods.lithium.common.hopper.HopperHelper", "me.jellysquid.mods.lithium.common.hopper.HopperHelper"})
 public class LithiumHopperHelperMixin {
@@ -15,7 +21,6 @@ public class LithiumHopperHelperMixin {
 	@WrapOperation(
 		method = {
 			"determineComparatorUpdatePattern",
-			// Lithium <0.13 compat
 			"tryMoveSingleItem(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/SidedInventory;Lnet/minecraft/item/ItemStack;ILnet/minecraft/util/math/Direction;)Z",
 			"tryMoveSingleItem(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/inventory/SidedInventory;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;ILnet/minecraft/util/math/Direction;)Z"
 		},
