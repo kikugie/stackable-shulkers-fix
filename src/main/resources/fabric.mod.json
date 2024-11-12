@@ -18,6 +18,7 @@
       "dev.kikugie.shulkerfix.ShulkerFixMod"
     ]
   },
+  "icon": "assets/shulkerfix/icon.png",
   "depends": {
     "fabricloader": ">=0.15",
     "minecraft": ">=1.20.5",
