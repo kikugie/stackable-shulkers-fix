@@ -3,9 +3,12 @@
   "id": "shulkerfix",
   "version": "${version}",
   "name": "Stackable Shulker Fix",
-  "description": "Makes stackable shulker boxes unstackable by hoppers",
+  "description": "Fixes issues with unstackable shulker boxes in Carpet on 1.20.5+",
   "authors": [
-    "KikuGIe"
+    "KikuGie"
+  ],
+  "contributors": [
+    "WinExp"
   ],
   "license": "MIT",
   "environment": "*",
