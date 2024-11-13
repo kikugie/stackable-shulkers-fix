@@ -24,6 +24,19 @@ Makes stacked shulker boxes count as unstackable items, allowing comparator sign
 - Categories: `shulkerfix`, `bugfix`, `intrusive`
 - Since: `1.5`
 
+### Legacy shulker item merging
+Reintroduces the logic for merging shulker box items before 1.20.5.
+The implementation allows partial item merging
+*(normally the game doesn't merge item stacks if the total amount is more than the max size)*
+and resets the entity age, allowing faster merging.
+*(Both were bugs in Carpet, but no one complained, so now we're reintroducing the bugs huh)*
+
+- Name: `legacyShulkerItemMerging`
+- Type: `boolean`
+- Default: `false`
+- Categories: `shulkerfix`, `experimental`
+- Since: `1.6`
+
 ### Hopper collection
 Makes hoppers pick up one shulker at a time from an entity stack.
 Note that this has a risk of breaking contraptions.
@@ -64,11 +77,3 @@ where vanilla clients see stacked shulker boxes as single items inside container
 - Categories: `shulkerfix`, `bugfix`, `experimental`
 - Since: `1.4`
 
-## Known issues/quirks
-
-### Item merging order
-Some shulker box colour sorters may be broken even when using this mod.
-Before 1.20.5 Carpet used custom logic for merging shulker box item entities,
-but now it relies on the vanilla behaviour.  
-There are currently no plans to port the old behaviour, but if you need it,
-submit an issue or a pull request on the GitHub page.

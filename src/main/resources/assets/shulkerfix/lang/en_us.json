@@ -11,5 +11,7 @@
   "carpet.rule.minecartCollectSingleShulkers.name": "Hopper Minecarts Collect Single Shulkers",
   "carpet.rule.minecartCollectSingleShulkers.desc": "Makes hopper minecarts pick up single shulkers from a stack entity.",
   "carpet.rule.overstackedMinecartSlowdown.name": "Overstacked Minecart Slowdown",
-  "carpet.rule.overstackedMinecartSlowdown.desc": "Disables additional slowdown caused by overstacked shulker boxes when set to false."
+  "carpet.rule.overstackedMinecartSlowdown.desc": "Disables additional slowdown caused by overstacked shulker boxes when set to false.",
+  "carpet.rule.legacyShulkerItemMerging": "Legacy Shulker Item Merging",
+  "carpet.rule.legacyShulkerItemMerging.desc": "Enables the shulker box item merging logic Carpet used prior to the 1.20.5 update."
 }
