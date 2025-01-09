@@ -1,5 +1,6 @@
 package dev.kikugie.shulkerfix.mixin.compat;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.kikugie.shulkerfix.Util;
@@ -22,5 +23,13 @@ public class LithiumStackListMixin {
 	)
 	private int modifyShulkerMaxCount(ItemStack instance, Operation<Integer> original) {
 		return Util.isShulkerBoxLimited(instance) ? 1 : original.call(instance);
+	}
+
+	@ModifyReturnValue(
+		method = "calculateSignalStrength",
+		at = @At("RETURN")
+	)
+	private int capComparatorSignalStrength(int original) {
+		return Util.limitComparatorOutput(original);
 	}
 }

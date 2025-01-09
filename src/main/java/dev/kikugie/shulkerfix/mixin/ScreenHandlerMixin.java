@@ -1,5 +1,6 @@
 package dev.kikugie.shulkerfix.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import dev.kikugie.shulkerfix.Util;
@@ -17,5 +18,13 @@ public class ScreenHandlerMixin {
 	)
 	private static int fixOverstackedSignalStrength(Inventory instance, ItemStack stack, Operation<Integer> original) {
 		return !Util.isShulkerBoxLimited(stack) || Util.isWrapped(instance) ? original.call(instance, stack) : 1;
+	}
+
+	@ModifyReturnValue(
+		method = "calculateComparatorOutput(Lnet/minecraft/inventory/Inventory;)I",
+		at = @At("RETURN")
+	)
+	private static int capComparatorSignalStrength(int original) {
+		return Util.limitComparatorOutput(original);
 	}
 }

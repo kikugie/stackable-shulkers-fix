@@ -10,13 +10,19 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 
+import java.util.Objects;
+
 public class Util {
 	public static boolean isShulkerBoxChecked(ItemStack stack) {
 		return !ShulkerFixSettings.hopperShulkerStacking && isShulkerBox(stack);
 	}
 
 	public static boolean isShulkerBoxLimited(ItemStack stack) {
-		return ShulkerFixSettings.overstackedShulkerSignalStrength && isShulkerBox(stack);
+		return !Objects.equals(ShulkerFixSettings.overstackedShulkerSignalStrength, "false") && isShulkerBox(stack);
+	}
+
+	public static int limitComparatorOutput(int original) {
+		return Objects.equals(ShulkerFixSettings.overstackedShulkerSignalStrength, "capped") ? Math.min(original, 15) : original;
 	}
 
 	public static boolean isShulkerBox(ItemStack stack) {

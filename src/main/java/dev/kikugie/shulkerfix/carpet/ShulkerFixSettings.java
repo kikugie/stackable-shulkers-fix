@@ -10,9 +10,6 @@ public class ShulkerFixSettings {
 	@Rule(categories = {SHULKERFIX, INTRUSIVE, RuleCategory.BUGFIX})
 	public static boolean hopperShulkerStacking = false;
 
-	@Rule(categories = {SHULKERFIX, INTRUSIVE, RuleCategory.BUGFIX})
-	public static boolean overstackedShulkerSignalStrength = true;
-
 	@Rule(categories = {SHULKERFIX, RuleCategory.BUGFIX, RuleCategory.EXPERIMENTAL})
 	public static boolean clientShulkerSync = false;
 
@@ -27,4 +24,7 @@ public class ShulkerFixSettings {
 
 	@Rule(categories = {SHULKERFIX, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL})
 	public static boolean overstackedMinecartSlowdown = true;
+
+	@Rule(categories = {SHULKERFIX, INTRUSIVE, RuleCategory.BUGFIX}, options = {"true", "false", "capped"})
+	public static String overstackedShulkerSignalStrength = "true";
 }

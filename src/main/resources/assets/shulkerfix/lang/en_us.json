@@ -3,7 +3,7 @@
   "carpet.rule.hopperShulkerStacking.name": "Hopper Shulker Box Stacking",
   "carpet.rule.hopperShulkerStacking.desc": "Controls whenever hopper transfers should stack shulkers in containers.",
   "carpet.rule.overstackedShulkerSignalStrength.name": "Overstacked Shulker Signal Strength",
-  "carpet.rule.overstackedShulkerSignalStrength.desc": "Makes stacked shulkers create stronger comparator output, also known as OSS/HSS.",
+  "carpet.rule.overstackedShulkerSignalStrength.desc": "Changes how stacked shulker boxes affect comparator output:\n  - 'true': Shulkers have signal strength of unstackable items, allowing output up to 897 (AKA OSS/HSS);\n  - 'false': Shulkers have signal strength of stackable items, reaching 15 when all slots are full (hoppers won't be able to fill over SS1);\n  - 'capped': Shulkers have signal strength of unstackable items, but the resulting output is capped at 15.",
   "carpet.rule.clientShulkerSync.name": "Sync Stacked Shulker Count",
   "carpet.rule.clientShulkerSync.desc": "Fixes displayed shulker amount on vanilla clients. See issue #1899 in Carpet's repo.",
   "carpet.rule.hopperCollectSingleShulkers.name": "Hoppers Collect Single Shulkers",
