@@ -17,9 +17,9 @@ Prevents hoppers from stacking shulker boxes, even if the max count is >1.
 
 ### Fixed comparator output
 Changes how stacked shulker boxes affect comparator output:
-- `true`: Shulkers have signal strength of unstackable items, allowing output up to 897 (AKA OSS/HSS);
-- `false`: Shulkers have signal strength of stackable items, reaching 15 when all slots are full (hoppers won't be able to fill over SS1);
-- `capped`: Shulkers have signal strength of unstackable items, but the resulting output is capped at 15.
+1. `true`: Shulkers have signal strength of unstackable items, allowing output up to 897 (AKA OSS/HSS);
+2. `false`: Shulkers have signal strength of stackable items, reaching 15 when all slots are full (hoppers won't be able to fill over SS1);
+3. `capped`: Shulkers have signal strength of unstackable items, but the resulting output is capped at 15.
 
 - Name: `overstackedShulkerSignalStrength`
 - Type: `string`
