@@ -22,6 +22,7 @@ public class Util {
     }
 
     public static int determineSignalStrengthContribution(ItemStack stack) {
+        if (!isShulkerBox(stack)) return stack.getMaxCount();
         return switch (ShulkerFixSettings.overstackedShulkerSignalStrength) {
             case "true", "capped" -> 1;
             case "normalized" -> stack.getCount();
