@@ -1,0 +1,42 @@
+carpet:
+  category.shulkerfix: ShulkerFix
+  carpet.rule:
+    hopperShulkerStacking:
+      name: Hopper Shulker Box Stacking
+      desc: |-
+        Enables hopper transfers to stack empty shulker boxes when 'stackableShulkerBoxes' rule is enabled.
+        In the default state this rule prevents shulker box stacking for compatibility reasons.
+    overstackedShulkerSignalStrength:
+      name: Overstacked Shulker Signal Strength
+      desc: |-
+        Changes how stacked shulker boxes affect comparator output:
+        - 'true': Shulkers have signal strength of unstackable items, allowing comparator signal up to 897 (AKA OSS/HSS);
+        - 'false': Shulkers have signal strength of stackable items, reaching 15 when all slots are full (hoppers won't be able to fill over SS1);
+        - 'capped': Shulkers have signal strength of unstackable items, but the resulting output is capped at 15.
+    hopperCollectSingleShulkers:
+      name: Hoppers Collect Single Shulkers
+      desc: |-
+        Prevents hoppers from picking up a whole item entity stack at once.
+        See also: 'minecartCollectSingleShulkers'.
+    minecartCollectSingleShulkers:
+      name: Hopper Minecarts Collect Single Shulkers
+      desc: |-
+        Prevents hopper minecarts from picking up a whole item entity stack at once.
+        See also: 'hopperCollectSingleShulkers'.
+    overstackedMinecartSlowdown:
+      name: Overstacked Minecart Slowdown
+      desc: |-
+        Changes behaviour of hopper and chest minecarts with stacked shulkers.
+        When enabled, minecarts with overstacked items will receive additional slowdown.
+        This functionality is affected by 'overstackedShulkerSignalStrength', 
+        which when set to 'false' will prevent minecart slowdown as well.
+    legacyShulkerItemMerging:
+      name: Legacy Shulker Item Merging
+      desc: |-
+        Enables shulker box item merging logic Carpet used prior to the 1.20.5 update.
+        It allows partial item merging (i.e. 48 + 32 -> 64 + 16) and resets merging cooldown on every attempt.
+        Some contraptions like shulker box colour sorters relied on this behaviour and are broken without this rule.
+    clientShulkerSync:
+      name: Sync Stacked Shulker Count
+      desc: |-
+        Fixes displayed shulker amount on vanilla clients. See issue #1899 in Carpet's repo.
