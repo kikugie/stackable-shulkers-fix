@@ -22,7 +22,7 @@ public class LithiumStackListMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxCount()I")
 	)
 	private int modifyShulkerMaxCount(ItemStack instance, Operation<Integer> original) {
-		return Util.isShulkerBoxLimited(instance) ? 1 : original.call(instance);
+		return Util.determineSignalStrengthContribution(instance);
 	}
 
 	@ModifyReturnValue(

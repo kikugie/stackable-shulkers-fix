@@ -13,94 +13,104 @@ import net.minecraft.item.ItemStack;
 import java.util.Objects;
 
 public class Util {
-	public static boolean isShulkerBoxChecked(ItemStack stack) {
-		return !ShulkerFixSettings.hopperShulkerStacking && isShulkerBox(stack);
-	}
+    public static boolean isHopperStackingPrevented(ItemStack stack) {
+        return !ShulkerFixSettings.hopperShulkerStacking && isShulkerBox(stack);
+    }
 
-	public static boolean isShulkerBoxLimited(ItemStack stack) {
-		return !Objects.equals(ShulkerFixSettings.overstackedShulkerSignalStrength, "false") && isShulkerBox(stack);
-	}
+    public static boolean isOverstackedOutputAllowed(ItemStack stack) {
+        return !Objects.equals(ShulkerFixSettings.overstackedShulkerSignalStrength, "false") && isShulkerBox(stack);
+    }
 
-	public static int limitComparatorOutput(int original) {
-		return Objects.equals(ShulkerFixSettings.overstackedShulkerSignalStrength, "capped") ? Math.min(original, 15) : original;
-	}
+    public static int determineSignalStrengthContribution(ItemStack stack) {
+        return switch (ShulkerFixSettings.overstackedShulkerSignalStrength) {
+            case "true", "capped" -> 1;
+            case "normalized" -> stack.getCount();
+            case "false" -> stack.getMaxCount();
+            default -> throw new UnsupportedOperationException(
+                "Invalid 'overstackedShulkerSignalStrength' state: " + ShulkerFixSettings.overstackedShulkerSignalStrength);
+        };
+    }
 
-	public static boolean isShulkerBox(ItemStack stack) {
-		return stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof ShulkerBoxBlock;
-	}
+    public static int limitComparatorOutput(int original) {
+        return Objects.equals(ShulkerFixSettings.overstackedShulkerSignalStrength, "capped") ? Math.min(original, 15) : original;
+    }
 
-	public static boolean hasCustomMaxStackSize(ItemStack stack) {
-		int defaultStackSize = stack.getDefaultComponents().getOrDefault(DataComponentTypes.MAX_STACK_SIZE, 1);
-		int currentStackSize = stack.getOrDefault(DataComponentTypes.MAX_STACK_SIZE, 1);
-		return defaultStackSize != currentStackSize;
-	}
+    public static boolean isShulkerBox(ItemStack stack) {
+        return stack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof ShulkerBoxBlock;
+    }
 
-	public static Inventory wrapInventory(Inventory inventory) {
-		return new WrapperInventory(inventory);
-	}
+    public static boolean hasCustomMaxStackSize(ItemStack stack) {
+        int defaultStackSize = stack.getDefaultComponents().getOrDefault(DataComponentTypes.MAX_STACK_SIZE, 1);
+        int currentStackSize = stack.getOrDefault(DataComponentTypes.MAX_STACK_SIZE, 1);
+        return defaultStackSize != currentStackSize;
+    }
 
-	public static boolean isWrapped(Inventory inventory) {
-		return inventory instanceof WrapperInventory;
-	}
+    public static Inventory wrapInventory(Inventory inventory) {
+        return new WrapperInventory(inventory);
+    }
 
-	public static boolean collectOneItem(Inventory inventory, ItemEntity itemEntity) {
-		ItemStack itemStack = itemEntity.getStack().copyWithCount(1);
-		ItemStack itemStack2 = HopperBlockEntity.transfer(null, inventory, itemStack, null);
-		if (itemStack2.isEmpty()) {
-			itemEntity.getStack().decrement(1);
-			if (itemEntity.getStack().isEmpty()) {
-				itemEntity.setStack(ItemStack.EMPTY);
-				itemEntity.discard();
-			}
-			return true;
-		}
-		return false;
-	}
+    public static boolean isWrapped(Inventory inventory) {
+        return inventory instanceof WrapperInventory;
+    }
 
-	private record WrapperInventory(Inventory delegate) implements Inventory {
-		@Override
-		public int size() {
-			return this.delegate.size();
-		}
+    public static boolean collectOneItem(Inventory inventory, ItemEntity itemEntity) {
+        ItemStack itemStack = itemEntity.getStack().copyWithCount(1);
+        ItemStack itemStack2 = HopperBlockEntity.transfer(null, inventory, itemStack, null);
+        if (itemStack2.isEmpty()) {
+            itemEntity.getStack().decrement(1);
+            if (itemEntity.getStack().isEmpty()) {
+                itemEntity.setStack(ItemStack.EMPTY);
+                itemEntity.discard();
+            }
+            return true;
+        }
+        return false;
+    }
 
-		@Override
-		public boolean isEmpty() {
-			return this.delegate.isEmpty();
-		}
+    private record WrapperInventory(Inventory delegate) implements Inventory {
+        @Override
+        public int size() {
+            return this.delegate.size();
+        }
 
-		@Override
-		public ItemStack getStack(int slot) {
-			return this.delegate.getStack(slot);
-		}
+        @Override
+        public boolean isEmpty() {
+            return this.delegate.isEmpty();
+        }
 
-		@Override
-		public ItemStack removeStack(int slot, int amount) {
-			return this.delegate.removeStack(slot, amount);
-		}
+        @Override
+        public ItemStack getStack(int slot) {
+            return this.delegate.getStack(slot);
+        }
 
-		@Override
-		public ItemStack removeStack(int slot) {
-			return this.delegate.removeStack(slot);
-		}
+        @Override
+        public ItemStack removeStack(int slot, int amount) {
+            return this.delegate.removeStack(slot, amount);
+        }
 
-		@Override
-		public void setStack(int slot, ItemStack stack) {
-			this.delegate.setStack(slot, stack);
-		}
+        @Override
+        public ItemStack removeStack(int slot) {
+            return this.delegate.removeStack(slot);
+        }
 
-		@Override
-		public void markDirty() {
-			this.delegate.markDirty();
-		}
+        @Override
+        public void setStack(int slot, ItemStack stack) {
+            this.delegate.setStack(slot, stack);
+        }
 
-		@Override
-		public boolean canPlayerUse(PlayerEntity player) {
-			return this.delegate.canPlayerUse(player);
-		}
+        @Override
+        public void markDirty() {
+            this.delegate.markDirty();
+        }
 
-		@Override
-		public void clear() {
-			this.delegate.clear();
-		}
-	}
+        @Override
+        public boolean canPlayerUse(PlayerEntity player) {
+            return this.delegate.canPlayerUse(player);
+        }
+
+        @Override
+        public void clear() {
+            this.delegate.clear();
+        }
+    }
 }

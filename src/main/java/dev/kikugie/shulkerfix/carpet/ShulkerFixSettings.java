@@ -25,6 +25,6 @@ public class ShulkerFixSettings {
 	@Rule(categories = {SHULKERFIX, RuleCategory.FEATURE, RuleCategory.EXPERIMENTAL})
 	public static boolean overstackedMinecartSlowdown = true;
 
-	@Rule(categories = {SHULKERFIX, INTRUSIVE, RuleCategory.BUGFIX}, options = {"true", "false", "capped"})
+	@Rule(categories = {SHULKERFIX, INTRUSIVE, RuleCategory.BUGFIX}, options = {"true", "false", "capped", "normalized"})
 	public static String overstackedShulkerSignalStrength = "true";
 }

@@ -23,7 +23,7 @@ public class HopperBlockEntityMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxCount()I")
 	)
 	private int modifyShulkerMaxCount(ItemStack instance, Operation<Integer> original) {
-		return Util.isShulkerBoxChecked(instance) ? instance.getCount() : original.call(instance);
+		return Util.isHopperStackingPrevented(instance) ? instance.getCount() : original.call(instance);
 	}
 
 	@WrapOperation(
@@ -31,7 +31,7 @@ public class HopperBlockEntityMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMaxCount()I")
 	)
 	private static int modifyShulkerMaxCountStatic(ItemStack instance, Operation<Integer> original) {
-		return Util.isShulkerBoxChecked(instance) ? 1 : original.call(instance);
+		return Util.isHopperStackingPrevented(instance) ? 1 : original.call(instance);
 	}
 
 	@WrapOperation(
@@ -39,7 +39,7 @@ public class HopperBlockEntityMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z")
 	)
 	private static boolean limitCollectCount(Inventory inventory, ItemEntity itemEntity, Operation<Boolean> original) {
-		if (!Util.isShulkerBoxChecked(itemEntity.getStack())) return original.call(inventory, itemEntity);
+		if (!Util.isHopperStackingPrevented(itemEntity.getStack())) return original.call(inventory, itemEntity);
 		if (ShulkerFixSettings.hopperCollectSingleShulkers && inventory instanceof HopperBlockEntity)
 			return Util.collectOneItem(inventory, itemEntity);
 		else if (ShulkerFixSettings.minecartCollectSingleShulkers && inventory instanceof HopperMinecartEntity)
@@ -52,7 +52,7 @@ public class HopperBlockEntityMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/block/entity/HopperBlockEntity;extract(Lnet/minecraft/inventory/Inventory;Lnet/minecraft/entity/ItemEntity;)Z")
 	)
 	private static boolean limitHopperCollectCount(Inventory inventory, ItemEntity itemEntity, Operation<Boolean> original) {
-		if (!Util.isShulkerBoxChecked(itemEntity.getStack())) return original.call(inventory, itemEntity);
+		if (!Util.isHopperStackingPrevented(itemEntity.getStack())) return original.call(inventory, itemEntity);
 		if (ShulkerFixSettings.hopperCollectSingleShulkers)
 			return Util.collectOneItem(inventory, itemEntity);
 		else return original.call(inventory, itemEntity);
@@ -64,6 +64,6 @@ public class HopperBlockEntityMixin {
 		cancellable = true
 	)
 	private static void cancelItemMerging(ItemStack first, ItemStack second, CallbackInfoReturnable<Boolean> cir) {
-		if (Util.isShulkerBoxChecked(first) || Util.isShulkerBox(second)) cir.setReturnValue(false);
+		if (Util.isHopperStackingPrevented(first) || Util.isShulkerBox(second)) cir.setReturnValue(false);
 	}
 }

@@ -1,6 +1,6 @@
 carpet:
   category.shulkerfix: ShulkerFix
-  carpet.rule:
+  rule:
     hopperShulkerStacking:
       name: Hopper Shulker Box Stacking
       desc: |-
@@ -10,9 +10,10 @@ carpet:
       name: Overstacked Shulker Signal Strength
       desc: |-
         Changes how stacked shulker boxes affect comparator output:
-        - 'true': Shulkers have signal strength of unstackable items, allowing comparator signal up to 897 (AKA OSS/HSS);
-        - 'false': Shulkers have signal strength of stackable items, reaching 15 when all slots are full (hoppers won't be able to fill over SS1);
-        - 'capped': Shulkers have signal strength of unstackable items, but the resulting output is capped at 15.
+        - 'true': Shulkers have signal strength of unstackable items, allowing comparator signal up to 897 (AKA OSS/HSS).
+        - 'false': Shulkers have signal strength of stackable items, reaching 15 when all slots are full (hoppers won't be able to fill over SS1).
+        - 'capped': Shulkers have signal strength of unstackable items, but the resulting output is capped at 15. This implementation preserves overstacked item filters.
+        - 'normalized': Any amount of shulkers in a slot is counted as a single unstackable item. This limits the output to signal strength 15 and patches overstacked item filters.
     hopperCollectSingleShulkers:
       name: Hoppers Collect Single Shulkers
       desc: |-
