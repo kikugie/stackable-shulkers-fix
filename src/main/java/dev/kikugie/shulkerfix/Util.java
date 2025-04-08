@@ -3,7 +3,6 @@ package dev.kikugie.shulkerfix;
 import dev.kikugie.shulkerfix.carpet.ShulkerFixSettings;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.block.entity.HopperBlockEntity;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -11,6 +10,8 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 
 import java.util.Objects;
+
+import static net.minecraft.component.DataComponentTypes.MAX_STACK_SIZE;
 
 public class Util {
     public static boolean isHopperStackingPrevented(ItemStack stack) {
@@ -41,8 +42,8 @@ public class Util {
     }
 
     public static boolean hasCustomMaxStackSize(ItemStack stack) {
-        int defaultStackSize = stack.getDefaultComponents().getOrDefault(DataComponentTypes.MAX_STACK_SIZE, 1);
-        int currentStackSize = stack.getOrDefault(DataComponentTypes.MAX_STACK_SIZE, 1);
+        int defaultStackSize = stack.getDefaultComponents().getOrDefault(MAX_STACK_SIZE, 1);
+        int currentStackSize = stack.getOrDefault(MAX_STACK_SIZE, 1);
         return defaultStackSize != currentStackSize;
     }
 

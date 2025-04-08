@@ -2,12 +2,10 @@ package dev.kikugie.shulkerfix.carpet;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import carpet.api.settings.SettingsManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import dev.kikugie.shulkerfix.ShulkerFixMod;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.server.MinecraftServer;
 
 import java.io.IOException;
 import java.io.InputStream;
