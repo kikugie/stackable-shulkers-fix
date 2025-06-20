@@ -17,7 +17,7 @@ public class ScreenHandlerMixin {
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;getMaxCount(Lnet/minecraft/item/ItemStack;)I")
 	)
 	private static int fixOverstackedSignalStrength(Inventory instance, ItemStack stack, Operation<Integer> original) {
-		if (!Util.isWrapped(instance)) return original.call(instance, stack);
+		if (Util.isWrapped(instance)) return original.call(instance, stack);
 		return Util.determineSignalStrengthContribution(stack);
 	}
 
