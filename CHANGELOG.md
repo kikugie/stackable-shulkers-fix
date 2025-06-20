@@ -1,0 +1,1 @@
+Fixed comparator readout bug

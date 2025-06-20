@@ -23,15 +23,12 @@
   },
   "icon": "assets/shulkerfix/icon.png",
   "depends": {
-    "fabricloader": ">=0.16.10",
-    "minecraft": ">=1.21.5",
+    "fabricloader": ">=0.16",
+    "minecraft": "${minecraft}",
     "carpet": ">=1.4.169",
     "java": ">=21"
   },
   "recommends": {
-    "lithium": ">=0.14"
-  },
-  "conflicts": {
-    "lithium": "<0.14"
+    "lithium": ">=0.13"
   }
 }
