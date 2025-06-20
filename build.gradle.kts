@@ -25,6 +25,15 @@ dependencies {
     modLocalRuntime(modCompileOnly("maven.modrinth:lithium:${property("deps.lithium")}")!!)
 }
 
+loom {
+    runs.named("client") {
+        ideConfigGenerated(true)
+        runDir = "../../run"
+        if (environment == "client")
+            programArgs("--username=KikuGie")
+    }
+}
+
 tasks.processResources {
     inputs.property("version", project.version)
     inputs.property("minecraft", project.property("meta.compat"))

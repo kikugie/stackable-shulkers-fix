@@ -5,3 +5,7 @@ plugins {
     id("me.modmuss50.mod-publish-plugin") version "0.8.+" apply false
 }
 stonecutter active "1.21.6"
+
+stonecutter tasks {
+    order("publishMods")
+}
