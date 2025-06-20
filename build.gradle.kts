@@ -81,7 +81,7 @@ publishMods {
     modrinth {
         projectId = property("publish.modrinth") as String
         accessToken = mr
-        minecraftVersions.add(stonecutter.current.version)
+        minecraftVersions.set(provider { property("meta.versions").toString().split(' ') })
         requires("carpet")
         optional("lithium")
     }

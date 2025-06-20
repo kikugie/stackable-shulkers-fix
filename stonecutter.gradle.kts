@@ -7,5 +7,5 @@ plugins {
 stonecutter active "1.21.6"
 
 stonecutter tasks {
-    order("publishMods")
+    order("publishModrinth")
 }
