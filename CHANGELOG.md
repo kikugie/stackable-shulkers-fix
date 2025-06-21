@@ -1,1 +1,1 @@
-Fixed comparator readout bug
+Fixed Carpet dependency
